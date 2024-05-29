@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   function handleChange(e) {
     setFormData({ ...formData, [e.target.id]: e.target.value });
     // console.log(formData);
@@ -29,6 +30,7 @@ function SignUp() {
         setIsLoading(false);
         return;
       }
+      navigate("/sign-in");
     } catch (err) {
       setIsLoading(false);
       setError(true);
@@ -40,21 +42,21 @@ function SignUp() {
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="username"
+          placeholder="Username"
           id="username"
           onChange={handleChange}
           className="bg-slate-100 p-3 rounded-lg"
         />
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           id="email"
           onChange={handleChange}
           className="bg-slate-100 p-3 rounded-lg"
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           id="password"
           onChange={handleChange}
           className="bg-slate-100 p-3 rounded-lg"
